@@ -25,7 +25,7 @@ void servershow()
         if (flag)
         {
             imshow("server", img);
-            waitKey(5);
+            waitKey(1);
         }
     }
 }
@@ -38,12 +38,10 @@ int main()
         boost::asio::io_service io_service;
         boost::array<char, 921600> buf;         /* the size of received mat frame is calculated by width*height*no_channels */
         tcp::acceptor acceptor(io_service, tcp::endpoint(tcp::v4(), 3200));
-
+        tcp::socket socket(io_service);
+        acceptor.accept(socket);
         for (;;)
         {
-            tcp::socket socket(io_service);
-            acceptor.accept(socket);
-
             boost::system::error_code error;
             size_t len = boost::asio::read(socket, boost::asio::buffer(buf), error);
 

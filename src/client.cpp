@@ -26,7 +26,7 @@ int main()
     {
         cap >> frame;
         imshow("client", frame);
-        waitKey(100);
+        waitKey(10);
         frame = (frame.reshape(0, 1)); // to make it continuous
         try
         {
